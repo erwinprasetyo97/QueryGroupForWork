@@ -121,7 +121,7 @@ SELECT
        AND b.patternid_bom = a.patternid_bom) AS pieces
 FROM tb_cmz_parts a
 WHERE
-    a.patternid_bom =  'COH2639 A 18/25'
+    a.patternid_bom =  'COH2645 A 18/25'
     -- and a.orders_code NOT LIKE '%PGC1-2406%'
     -- and a.part_name = 'FLAP TOP'
     and a.model = 'UPDATE KEEPER CW566 - Coated Canvas Signature Cassie Crossbody 17 (COMELZ) CONS 2,2889'
