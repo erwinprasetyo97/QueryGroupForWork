@@ -28,8 +28,13 @@ WITH ranked_data AS (
     FROM TB_CMZ_HIDES a
     WHERE
         (INSTR(a.orders_code, 'R') > 0 OR INSTR(a.orders_code, 'J') > 0)
---        and a.orders_code NOT IN ('KURANGAN', 'PRESS', 'COLLAR', 'LYR', 'MLYR')
-        AND TRUNC(a.start_time) BETWEEN TO_DATE('21-10-2024', 'dd-mm-yyyy') AND TO_DATE('23-10-2024', 'dd-mm-yyyy')
+        AND a.orders_code NOT LIKE '%KURANGAN%'
+        AND a.orders_code NOT LIKE '%PRESS%'
+        AND a.orders_code NOT LIKE '%COLLAR%'
+        AND a.orders_code NOT LIKE '%LYR%'
+        AND a.orders_code NOT LIKE '%MLYR%'
+        AND a.orders_code NOT LIKE '%MYL%'
+        AND TRUNC(a.start_time) BETWEEN TO_DATE('31-10-2024', 'dd-mm-yyyy') AND TO_DATE('06-11-2024', 'dd-mm-yyyy')
 )
 SELECT 
     start_time, 
@@ -40,3 +45,4 @@ SELECT
     code_hides
 FROM ranked_data
 WHERE rn = 1;
+
