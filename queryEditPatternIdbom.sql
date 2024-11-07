@@ -3,12 +3,13 @@ contoh kasus : COH2104 A 219 -> COH2104 A 2/19
 COH2618 A 1826 -> COH2618 A 18/26
 */
 UPDATE tb_cmz_parts
-SET patternid_bom = REGEXP_REPLACE(patternid_bom, '([0-9]{1,2})(8)', '\1/\2')
-WHERE patternid_bom LIKE '%COH2774 E%' 
-  AND style_code = 'COH2774'
-  and model = 'CAT10 - Lucas Crossbody in Pebbled Leather - REFINED PEBBLE - CONS 2,3028'
+SET patternid_bom = REGEXP_REPLACE(patternid_bom, '([0-9]{1,2})(21)', '\1/\2')
+WHERE patternid_bom LIKE '%COH2569 A%' 
+  AND style_code = 'COH2569'
+--   and model LIKE '%CR981%'
+ and model = 'CR652 Glazed Leather Juliet Shoulder Bag JUN-PLAN (COMELZ) CONS 6,1'
   and PATTERNID_BOM NOT LIKE '%/%' -- apabila sudah ada pattern yang sudah benar
-  AND TRUNC(start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('03-11-2024', 'dd-mm-yyyy');
+  AND TRUNC(start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('07-11-2024', 'dd-mm-yyyy');
 
 COMMIT;
 ROLLBACK;

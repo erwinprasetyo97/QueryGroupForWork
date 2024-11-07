@@ -37,7 +37,7 @@ WITH ranked_data AS (
         -- and a.machine_code IN ('k012758','k012562', 'k015533', 'k014188')
         and a.orders_code NOT LIKE '%PG%'
 
-        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-10-2024', 'dd-mm-yyyy') AND TO_DATE('31-10-2024', 'dd-mm-yyyy')
+        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('07-11-2024', 'dd-mm-yyyy')
 )
 SELECT
     machine_code, 
@@ -48,3 +48,18 @@ SELECT
     code_hides
 FROM ranked_data
 WHERE rn = 1;
+
+
+-- query cek data hides setelah diedit
+SELECT 
+    a.machine_code, 
+    a.start_time,
+    a.orders_code,
+    a.models,
+    a.operatore,
+    a.code_hides
+FROM tb_cmz_hides a
+WHERE
+    a.models = 'update GUSSET 1 MOLD PKID - CY707 CONS 4,2587'
+    -- and a.operatore IS NULL
+    and TRUNC(a.start_time) = TO_DATE('04-11-2024', 'dd-mm-yyyy');

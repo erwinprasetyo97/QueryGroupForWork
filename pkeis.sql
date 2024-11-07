@@ -1,13 +1,13 @@
 -- update data berdasarkan style code
     UPDATE tb_cmz_hides
-    SET orders_code = 'PGC1-2407-000000143'
+    SET orders_code = 'PGD2-2410-000000062'
     WHERE 
-        models = 'UPDATE GUSSET ANCHOR TOP PEBBLE DF CROSSGRAIN - CT803 - City Large Bucket Bag in Double Face Leather (COMELZ) CONS 6,1579'
+        models = 'CAM20 - Glazed Leather Pocket Juliet Bag 30 - SHINY SMOOTHY LEATHER - CONS 7,6598'
 --        and machine_code = 'N0315490'
 --        models LIKE  '%CO915__Lucas Crossbody in Signature Jacquard%'
-       and orders_code = 'N0315490_00'
+       and orders_code = 'PIGA-2411-000000030'
 --        and machine_code IN ('k012758','k012562', 'k015533', 'k014188', 'k015706')
-       and machine_code = 'k014302'
+    --    and machine_code = 'k014302'
 --        and orders_code = 'N09161406_00'
 --        and code_hides = 'N0565881'
 --        and orders_code = 'HD 0_8 BLACK'
@@ -16,25 +16,25 @@
 --        AND machine_code IN ('k012758','k012562', 'k015533', 'k014188', 'k015706')
     --    and code_hides = 'N0406056'
     --    and models = 'N-CONS 4,3822'
-        AND trunc(start_time) = to_date('01-10-2024', 'dd-mm-yyyy');
---        AND trunc(start_time ) BETWEEN to_date('01-10-2024', 'dd-mm-yyyy') AND to_date('24-10-2024', 'dd-mm-yyyy');
+        -- AND trunc(start_time) = to_date('01-10-2024', 'dd-mm-yyyy');
+       AND trunc(start_time ) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('07-11-2024', 'dd-mm-yyyy');
 
 --------------------------------------------------------------------------  
 
 UPDATE tb_cmz_parts
-SET orders_code = 'PGC1-2407-000000143'
+SET orders_code = 'PGD2-2410-000000062'
 WHERE
 --    orders_code = 'PGC1-2408-000000048'
-    model = 'UPDATE GUSSET ANCHOR TOP PEBBLE DF CROSSGRAIN - CT803 - City Large Bucket Bag in Double Face Leather (COMELZ) CONS 6,1579'
+    model = 'CAM20 - Glazed Leather Pocket Juliet Bag 30 - SHINY SMOOTHY LEATHER - CONS 7,6598'
 --    and machine_code = 'k014444'
 --    and part_name = '#2 HANG TAG'
-    and patternid_bom = 'COH2618 A 7/18'
-    and code_hides = 'N0315490'
-    and style_code = 'COH2618'
-    and machine_code = 'k014302'
-    and orders_code = 'N0315490_00'
+    -- and patternid_bom = 'COH2618 A 7/18'
+    -- and code_hides = 'N0315490'
+    and style_code = 'COH2770'
+    -- and machine_code = 'k014302'
+    -- and orders_code = 'N0315490_00'
     
---    and orders_code = 'PGD2-2408-000000007' 
+   and orders_code = 'PIGA-2411-000000030' 
 --    and orders_code = 'HD 0_8 BLACK'
 --    and orders_code = 'PGC1-2408-000000023'
     -- and machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
@@ -47,8 +47,8 @@ WHERE
 --    and machine_code IN ('k012758','k012562', 'k015533', 'k014188', 'k015706', 'k015537', 'k015273', 'k015211')
 --    and code_hides = 'N0406056'
 --    and model = 'CT716 - Racer Crossbody in Signature_Natural Smooth Calf_L-54938-09_BLACK_CONS 5,66'
-    AND trunc(start_time) = to_date('01-10-2024', 'dd-mm-yyyy');
---    AND trunc(start_time ) BETWEEN to_date('01-10-2024', 'dd-mm-yyyy') AND to_date('24-10-2024', 'dd-mm-yyyy');
+    -- AND trunc(start_time) = to_date('01-10-2024', 'dd-mm-yyyy');
+    AND trunc(start_time ) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('07-11-2024', 'dd-mm-yyyy');
 
 COMMIT;
 -- edit name operator

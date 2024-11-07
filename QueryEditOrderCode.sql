@@ -69,3 +69,11 @@ WHERE
 
 
 
+UPDATE tb_cmz_parts
+SET patternid_bom = 'COH2570 A 2/22'
+WHERE model LIKE  '%CR981%' 
+And orders_code = 'PGD2-2410-000000104'
+AND part_name = 'LONG SS FACING1'
+and trunc(start_time ) between to_date('01-11-2024', 'dd-mm-yyyy') and to_date('06-11-2024', 'dd-mm-yyyy');
+
+COMMIT;
