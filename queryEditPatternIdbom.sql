@@ -217,7 +217,14 @@ WHERE
 UPDATE tb_cmz_parts
 SET patternid_bom = 
     CASE
-        WHEN part_name = 'SHORT SS BUCKLE LOOP FACING' THEN 'COH2639 A 22/25'
+        WHEN part_name = 'FLAP TOP PATCH FACING TOP' THEN 'COH2774 A 7/13'
+        WHEN part_name = 'FLAP TOP PATCH FACING TOP_' THEN 'COH2774 A 7/13'
+        WHEN part_name = 'FRONT BACK SLASH PKT BINDING' THEN 'COH2774 A 3/13'
+        WHEN part_name = 'GUSSET ANCHOR' THEN 'COH2774 A 13/13'
+        WHEN part_name = 'GUSSET ANCHORFACING1' THEN 'COH2774 A 1/13'
+        WHEN part_name = 'PIPING' THEN 'COH2774 A 11/13'
+        WHEN part_name = 'SS ANCHOR FACING' THEN 'COH2774 A 12/13'
+        WHEN part_name = 'SS ANCHOR TOP' THEN 'COH2774 A 10/13'
         -- WHEN part_name = 'ANCHOR' THEN 'COH2569 A 18/21' -- same
         -- WHEN part_name = 'FRONT BACK' THEN 'COH2569 A 20/21'
         -- WHEN PART_NAME = 'FRONT BACK_2' THEN 'COH2569 A 21/21'
@@ -241,8 +248,8 @@ SET patternid_bom =
 WHERE 
 
 --    model = 'UPDATESINGLE_CR981_Glovetanned Leather Juliet Shoulder Bag_JAN-PLAN (COMELZ)_CONS_6,1'
-    style_code = 'COH2638'
-    and model = 'UPDATE KEEPER CW566 - Coated Canvas Signature Cassie Crossbody 17 (COMELZ) CONS 2,2889'
+    style_code = 'COH2774'
+    and model = 'CAT10 - Lucas Crossbody in Pebbled Leather - NATURAL SMOOTH CALF - CONS 1,4304'
     and trunc(start_time) BETWEEN to_date('01-10-2024', 'dd-mm-yyyy') AND to_date('31-10-2024', 'dd-mm-yyyy');
 
 COMMIT;

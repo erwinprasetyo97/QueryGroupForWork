@@ -59,7 +59,7 @@ WITH ranked_data AS (
     WHERE
 --        a.orders_code = 'PGD2-2406-000000038'
         a.patternid_bom LIKE '%COH2638 A%'
-        and a.model = 'MULTI CW565 - Refined Pebble Leather Cassie Crossbody 17 (COMELZ) CONS 3,1533'
+        and a.model = 'CAT10 - Lucas Crossbody in Pebbled Leather - NATURAL SMOOTH CALF - CONS 1,4304'
         -- and a.style_code != 'COH2638'
 --        and a.model LIKE '%CW640%'
 --        and a.part_name = 'TOP BINDING'
@@ -121,12 +121,12 @@ SELECT
        AND b.patternid_bom = a.patternid_bom) AS pieces
 FROM tb_cmz_parts a
 WHERE
-    a.patternid_bom =  'COH2645 A 18/25'
+    a.patternid_bom =  'COH2774 E 2/8'
     -- and a.orders_code NOT LIKE '%PGC1-2406%'
     -- and a.part_name = 'FLAP TOP'
-    and a.model = 'UPDATE KEEPER CW566 - Coated Canvas Signature Cassie Crossbody 17 (COMELZ) CONS 2,2889'
+    and a.model = 'CAT10 - Lucas Crossbody in Pebbled Leather - REFINED PEBBLE - CONS 2,3028'
     and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
-    and a.orders_code != 'PGC1-2409-000000038'
+    and a.orders_code != 'PGC1-2409-000000063'
 --    and a.orders_code = 'PGD2-2406-000000016'
     and TRUNC(a.start_time) BETWEEN TO_DATE('01-10-2024', 'dd-mm-yyyy') AND TO_DATE('31-10-2024', 'dd-mm-yyyy');
 
