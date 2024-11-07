@@ -36,8 +36,13 @@ WITH ranked_data AS (
         a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
         -- and a.machine_code IN ('k012758','k012562', 'k015533', 'k014188')
         and a.orders_code NOT LIKE '%PG%'
-
-        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('07-11-2024', 'dd-mm-yyyy')
+        and a.orders_code NOT LIKE '%KK%'
+        and a.orders_code NOT LIKE '%RIC%'
+        and a.orders_code NOT LIKE '%KURANGAN%'
+        
+        and a.models != 'esempio'
+        and a.models != 'cinturino'
+        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('06-11-2024', 'dd-mm-yyyy')
 )
 SELECT
     machine_code, 
