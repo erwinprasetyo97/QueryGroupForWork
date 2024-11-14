@@ -54,19 +54,20 @@ WITH ranked_data AS (
         a.patternid_bom,
         a.style_code,
         a.material,
-        ROW_NUMBER() OVER (PARTITION BY a.part_name ORDER BY a.start_time) AS rn
+        ROW_NUMBER() OVER (PARTITION BY a.patternid_bom ORDER BY a.start_time) AS rn
     FROM tb_cmz_parts a
     WHERE
 --        a.orders_code = 'PGD2-2406-000000038'
-        a.patternid_bom LIKE '%COH2638 A%'
-        and a.model = 'CAT10 - Lucas Crossbody in Pebbled Leather - NATURAL SMOOTH CALF - CONS 1,4304'
+        a.patternid_bom LIKE '%COH2663 E%'
+       and a.model LIKE '%CW640%'
+        -- and a.model = 'CR652 Glazed Leather Juliet Shoulder Bag JUN-PLAN (COMELZ) CONS 6,1'
         -- and a.style_code != 'COH2638'
 --        and a.model LIKE '%CW640%'
 --        and a.part_name = 'TOP BINDING'
         
 --        and a.machine_code IN ('k012758','k012562', 'k015533', 'k014188', 'k015706')
         -- AND a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
-        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-10-2024', 'dd-mm-yyyy') AND TO_DATE('31-10-2024', 'dd-mm-yyyy')
+        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('13-11-2024', 'dd-mm-yyyy')
 )
 SELECT
     machine_code, 
@@ -94,15 +95,17 @@ SELECT
     a.code_hides
 FROM tb_cmz_parts a
 WHERE
---    a.patternid_bom = 'COH2638 A 4/30'
+    -- a.patternid_bom LIKE '%COH2734 O%'
     -- and a.orders_code NOT LIKE '%PGC1-2406%'
-    -- and a.part_name = 'FLAP TOP'
---    and a.model = 'MULTI CW565 - Refined Pebble Leather Cassie Crossbody 17 (COMELZ) CONS 3,1533'
-    -- and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
-    a.orders_code = 'PGC1-2407-000000061'
-    -- and a.orders_code != 'PGC1-2407-000000143'
+    a.part_name LIKE '%FRONT%'
+    and a.model LIKE '%C9092-B4XUK%'
+    -- and a.model = 'CUTTING MOLD CY707 - Kailey Shoulder Bag in Refined Pebble Leather (COMELZ)'
+    and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
+--    and a.orders_code = 'PGC1-2407-000000061'
+    and a.orders_code != 'PGC1-2409-000000071'
 --    and a.orders_code = 'PGD2-2406-000000016'
-    and TRUNC(a.start_time) BETWEEN TO_DATE('01-10-2024', 'dd-mm-yyyy') AND TO_DATE('31-10-2024', 'dd-mm-yyyy');
+   and TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('10-11-2024', 'dd-mm-yyyy');
+    -- AND trunc(start_time) = to_date('07-11-2024', 'dd-mm-yyyy');
     
 -- query untuk melihat pieces 
 SELECT 
@@ -121,15 +124,14 @@ SELECT
        AND b.patternid_bom = a.patternid_bom) AS pieces
 FROM tb_cmz_parts a
 WHERE
-    a.patternid_bom =  'COH2774 E 2/8'
+    a.patternid_bom =  'COH2698 A 5/20'
     -- and a.orders_code NOT LIKE '%PGC1-2406%'
     -- and a.part_name = 'FLAP TOP'
-    and a.model = 'CAT10 - Lucas Crossbody in Pebbled Leather - REFINED PEBBLE - CONS 2,3028'
-    and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
-    and a.orders_code != 'PGC1-2409-000000063'
+    and a.model = 'CAD75 - Glazed Leather Juliet Shoulder Bag 25 - SHINY CRINKLE LEATHER - CONS 4,3822'
+    -- and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
+    -- and a.orders_code != 'PGC1-2409-000000063'
 --    and a.orders_code = 'PGD2-2406-000000016'
-    and TRUNC(a.start_time) BETWEEN TO_DATE('01-10-2024', 'dd-mm-yyyy') AND TO_DATE('31-10-2024', 'dd-mm-yyyy');
-
+    and TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('07-11-2024', 'dd-mm-yyyy');
 
 
 

@@ -20,7 +20,7 @@ WHERE
 --    and TRUNC(a.start_time) = TO_DATE('01-10-2024', 'dd-mm-yyyy');
     and TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('05-11-2024', 'dd-mm-yyyy');
     
--- melihat data yang sama satu kali di tb cmz hides
+-- melihat data yang sama satu kali di tb cmz hides yang belum ada package group nya
 WITH ranked_data AS (
     SELECT 
         a.machine_code, 
@@ -32,9 +32,8 @@ WITH ranked_data AS (
         ROW_NUMBER() OVER (PARTITION BY a.models ORDER BY a.start_time) AS rn
     FROM TB_CMZ_HIDES a
     WHERE
-
-        a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
-        -- and a.machine_code IN ('k012758','k012562', 'k015533', 'k014188')
+        -- a.machine_code IN ('k014444', 'k012757', 'k014302', 'k015660', 'k015444', 'k015465')
+        a.machine_code IN ('k012758', 'k012562', 'k015533', 'k014188')
         and a.orders_code NOT LIKE '%PG%'
         and a.orders_code NOT LIKE '%KK%'
         and a.orders_code NOT LIKE '%RIC%'
@@ -42,7 +41,7 @@ WITH ranked_data AS (
         
         and a.models != 'esempio'
         and a.models != 'cinturino'
-        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('06-11-2024', 'dd-mm-yyyy')
+        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('14-11-2024', 'dd-mm-yyyy')
 )
 SELECT
     machine_code, 

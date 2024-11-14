@@ -6,10 +6,10 @@ UPDATE tb_cmz_parts
 SET patternid_bom = REGEXP_REPLACE(patternid_bom, '([0-9]{1,2})(21)', '\1/\2')
 WHERE patternid_bom LIKE '%COH2569 A%' 
   AND style_code = 'COH2569'
---   and model LIKE '%CR981%'
- and model = 'CR652 Glazed Leather Juliet Shoulder Bag JUN-PLAN (COMELZ) CONS 6,1'
+  and model LIKE '%CR652%'
+--  and model = 'CR652_Glazed Leather Juliet Shoulder Bag_ Shiny crinkle leather_CONS 6,1'
   and PATTERNID_BOM NOT LIKE '%/%' -- apabila sudah ada pattern yang sudah benar
-  AND TRUNC(start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('07-11-2024', 'dd-mm-yyyy');
+  AND TRUNC(start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('12-11-2024', 'dd-mm-yyyy');
 
 COMMIT;
 ROLLBACK;
@@ -37,10 +37,22 @@ UPDATE tb_cmz_parts
 SET patternid_bom = REGEXP_REPLACE(patternid_bom, '([0-9])6$', '\1/7')
 WHERE patternid_bom LIKE 'COH2104 D%6'
   AND style_code = 'COH2104';
-
-
-
   
+-- case seperti ini COH2698 A 10/20 -> COH2698 A 10/21
+UPDATE tb_cmz_parts
+SET patternid_bom = REGEXP_REPLACE(patternid_bom, '(/)[0-9]+$', '/21')
+WHERE patternid_bom LIKE 'COH2698 A%' 
+  AND style_code = 'COH2698'
+  AND model = 'CAD75 - Glazed Leather Juliet Shoulder Bag 25 - SHINY CRINKLE LEATHER - CONS 4,3822'
+  AND orders_code != 'PGD2-2409-000000021'
+--  AND trunc(start_time) = TO_DATE('07-11-2024', 'dd-mm-yyyy');
+  AND TRUNC(start_time) BETWEEN TO_DATE('10-11-2024', 'dd-mm-yyyy') AND TO_DATE('12-11-2024', 'dd-mm-yyyy');
+
+COMMIT;
+ROLLBACK;
+
+
+
 -- untuk aktifkan row movement  
 ALTER TABLE tb_cmz_parts ENABLE ROW MOVEMENT;
 ALTER TABLE tb_cmz_hides ENABLE ROW MOVEMENT;
@@ -61,8 +73,8 @@ ALTER TABLE tb_cmz_parts DISABLE ROW MOVEMENT;
 ALTER TABLE tb_cmz_hides DISABLE ROW MOVEMENT;
 
 -- untuk rollback jika sudah dicommit, note harus di enable dulu baru diflashback setelah itu di disable lagi
-FLASHBACK TABLE tb_cmz_parts TO TIMESTAMP (SYSTIMESTAMP - INTERVAL '10' MINUTE);
-FLASHBACK TABLE tb_cmz_hides TO TIMESTAMP (SYSTIMESTAMP - INTERVAL '10' MINUTE);
+FLASHBACK TABLE tb_cmz_parts TO TIMESTAMP (SYSTIMESTAMP - INTERVAL '20' MINUTE);
+FLASHBACK TABLE tb_cmz_hides TO TIMESTAMP (SYSTIMESTAMP - INTERVAL '20' MINUTE);
 
 
 -- untuk case COH2618 A 1818 -> COH2618 A 18/18
@@ -218,40 +230,53 @@ WHERE
 UPDATE tb_cmz_parts
 SET patternid_bom = 
     CASE
-        WHEN part_name = 'FLAP TOP PATCH FACING TOP' THEN 'COH2774 A 7/13'
-        WHEN part_name = 'FLAP TOP PATCH FACING TOP_' THEN 'COH2774 A 7/13'
-        WHEN part_name = 'FRONT BACK SLASH PKT BINDING' THEN 'COH2774 A 3/13'
-        WHEN part_name = 'GUSSET ANCHOR' THEN 'COH2774 A 13/13'
-        WHEN part_name = 'GUSSET ANCHORFACING1' THEN 'COH2774 A 1/13'
-        WHEN part_name = 'PIPING' THEN 'COH2774 A 11/13'
-        WHEN part_name = 'SS ANCHOR FACING' THEN 'COH2774 A 12/13'
-        WHEN part_name = 'SS ANCHOR TOP' THEN 'COH2774 A 10/13'
-        -- WHEN part_name = 'ANCHOR' THEN 'COH2569 A 18/21' -- same
-        -- WHEN part_name = 'FRONT BACK' THEN 'COH2569 A 20/21'
-        -- WHEN PART_NAME = 'FRONT BACK_2' THEN 'COH2569 A 21/21'
-
-        -- WHEN part_name = 'HANDLE FACING' THEN 'COH2705 A 13/22' --same
-        -- WHEN part_name = 'HANDLE KEEPER FACING' THEN 'COH2705 A 5/22' -- same
-        -- WHEN part_name = 'HANDLE KEEPER TOP' THEN 'COH2705 A 1/22' -- same
-        -- WHEN part_name = 'HANDLE TOP1' THEN 'COH2569 A 9/21' -- same
-        -- WHEN part_name = 'LONG SS FACING' THEN 'COH2569 A 2/21' -- same
-        -- WHEN part_name = 'LONG SS TOP' THEN 'COH2705 A 17/22' -- same
-        -- WHEN part_name = 'SHORT SS BUCKLE LOOP FACING1' THEN 'COH2569 A 4/21' -- same
-        -- WHEN part_name = 'SHORT SS FACING1' THEN 'COH2569 A 16/21' -- same
-        -- WHEN part_name = 'SHORT SS KEEPER FACING1' THEN 'COH2569 A 7/21'
-        -- WHEN part_name = 'SHORT SS KEEPER TOP1' THEN 'COH2569 A 3/21'
-        -- WHEN part_name = 'SHORT SS KEEPER TOP(BURNISHED BLOCKER)' THEN 'COH2705 A 3/22'
-        -- WHEN part_name = 'SHORT SS TOP' THEN 'COH2705 A 20/22'
-        -- WHEN part_name = 'HANG TAG TOP' THEN 'COH2702 A 12/22'
-        -- WHEN part_name = 'INT FRONT SLASH PKT BINDING' THEN 'COH2702 E 2/4'
+        WHEN part_name = 'PKT TOP BINDING' THEN 'COH2770 A 31/40'
+        WHEN part_name = 'RIGHT GUSSET D RING ANCHOR TOP' THEN 'COH2770 A 22/40'
+        WHEN part_name = 'GUSSET FLAP HW PATCH TOP' THEN 'COH2770 A 4/40'
+        WHEN part_name = 'EXT ZIP PULLER LOOP FACING' THEN 'COH2770 A 36/40'
+        WHEN part_name = 'GUSSET FLAP TOP' THEN 'COH2770 A 37/40'
+        WHEN part_name = 'ANCHOR' THEN 'COH2770 A 3/40'
+        WHEN part_name = 'BOTTOM' THEN 'COH2770 A 7/40'
+        WHEN part_name = 'EXT ZIP PULLER' THEN 'COH2770 A 1/40'
+        WHEN part_name = 'ANCHOR LOOP FACING' THEN 'COH2770 A 2/40'
+        WHEN part_name = 'HANGTAG TOP' THEN 'COH2770 A 38/40'
+        WHEN part_name = 'FRONT' THEN 'COH2770 A 39/40'
+        WHEN part_name = 'HANGTAG FACING' THEN 'COH2770 A 19/40'
+        WHEN part_name = 'STRAP PAD FACING FILLER' THEN 'COH2770 A 23/40'
+        WHEN part_name = 'SHORT SS KEEPER TOP' THEN 'COH2770 A 24/40'
+        WHEN part_name = 'SHORT SS KEEPER FACING' THEN 'COH2770 A 26/40'
+        WHEN part_name = 'STRAP PAD TOP' THEN 'COH2770 A 27/40'
+        WHEN part_name = 'STRAP PAD FACING' THEN 'COH2770 A 28/40'
+        WHEN part_name = 'LONG SS FACING' THEN 'COH2770 A 15/40'
+        WHEN part_name = 'SHORT SS BUCKLE LOOP FACING' THEN 'COH2770 A 32/40'
+        WHEN part_name = 'SHORT SS TOP' THEN 'COH2770 A 16/40'
+        WHEN part_name = 'SHORT SS FACING' THEN 'COH2770 A 21/40'
+        WHEN part_name = 'LONG SS TOP' THEN 'COH2770 A 14/40'
+        WHEN part_name = 'GUSSET FLAP HW PATCH BOTTOM' THEN 'COH2770 A 5/40'
+        WHEN part_name = 'HANDLE SS KEEPER FACING' THEN 'COH2770 A 9/40'
+        WHEN part_name = 'HANDLE SHORT SS BUCKLE LOOP FACING' THEN 'COH2770 A 29/40'
+        WHEN part_name = 'HANDLE SS KEEPER TOP' THEN 'COH2770 A 18/40'
+        WHEN part_name = 'HANDLE LONG SS FACING' THEN 'COH2770 A 13/40'
+        WHEN part_name = 'HANDLE SHORT SS FACING' THEN 'COH2770 A 30/40'
+        WHEN part_name = 'HANDLE LONG SS TOP' THEN 'COH2770 A 11/40'
+        WHEN part_name = 'KEY HOOD FACING' THEN 'COH2770 A 8/40'
+        WHEN part_name = 'KEY HOOD TOP' THEN 'COH2770 A 33/40'
+        WHEN part_name = 'KEY HOOD STRAP FACING' THEN 'COH2770 A 10/40'
+        WHEN part_name = 'KEY HOOD STRAP' THEN 'COH2770 A 34/40'
+        WHEN part_name = 'GUSSET COLLAR' THEN 'COH2770 A 12/40'
+        WHEN part_name = 'GUSSET SLASH POCKET RIGHT GUSSET ACCORDION TOP' THEN 'COH2770 A 17/40'
+        WHEN part_name = 'GUSSET SLASH POCKET LEFT GUSSET ACCORDION TOP' THEN 'COH2770 A 20/40'
+        WHEN part_name = 'BACK' THEN 'COH2770 A 25/40'
+        WHEN part_name = 'GUSSET SLASH POCKET' THEN 'COH2770 A 35/40'
+        WHEN part_name = 'RIGHT GUSSET D RING ANCHOR FACING' THEN 'COH2770 A 6/40'
         else patternid_bom
     END
 WHERE 
 
 --    model = 'UPDATESINGLE_CR981_Glovetanned Leather Juliet Shoulder Bag_JAN-PLAN (COMELZ)_CONS_6,1'
-    style_code = 'COH2774'
-    and model = 'CAT10 - Lucas Crossbody in Pebbled Leather - NATURAL SMOOTH CALF - CONS 1,4304'
-    and trunc(start_time) BETWEEN to_date('01-10-2024', 'dd-mm-yyyy') AND to_date('31-10-2024', 'dd-mm-yyyy');
+    style_code = 'COH2770'
+    and model = 'CAM20 - Glazed Leather Pocket Juliet Bag 30 - SHINY SMOOTHY LEATHER - CONS 7,6598'
+    and trunc(start_time) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('12-11-2024', 'dd-mm-yyyy');
 
 COMMIT;
 ROLLBACK;
