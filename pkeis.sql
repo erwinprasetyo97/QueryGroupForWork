@@ -1,8 +1,8 @@
 -- update data berdasarkan style code
     UPDATE tb_cmz_hides
-    SET orders_code = 'PGD2-2410-000000086'
+    SET orders_code = 'PGC1-2410-000000038'
     WHERE 
-        models = 'CZ402 - Sullivan Portfolio Brief in Signature_THICK Refined Pebble O1 (Embossed Chicago)_CONS 5,0797'
+        models = 'CV436 - Coated Canvas Signature Cassie Crossbody 19 (COMELZ) CONS 3,2646'
         -- and operatore = '20201826'
 --        and machine_code = 'N0315490'
 --        models LIKE  '%CO915__Lucas Crossbody in Signature Jacquard%'
@@ -18,23 +18,23 @@
     --    and code_hides = 'N0406056'
     --    and models = 'N-CONS 4,3822'
         --  AND trunc(start_time) = to_date('07-11-2024', 'dd-mm-yyyy');
-      AND trunc(start_time ) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('13-11-2024', 'dd-mm-yyyy');
+      AND trunc(start_time ) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('14-11-2024', 'dd-mm-yyyy');
 
 COMMIT;
 --------------------------------------------------------------------------  
 
 UPDATE tb_cmz_parts
-SET orders_code = '85'
+SET orders_code = 'PGC1-2410-000000001'
 WHERE
 --    orders_code = 'PGC1-2408-000000048'
-    model = 'CUTTING MOLD CY707 - Kailey Shoulder Bag in Refined Pebble Leather (COMELZ)'
+    model = 'UPDATE 030924 CX071 - Racer Sling Pack in Smooth Leather (COMELZ) CONS 2,4617'
 --    and machine_code = 'k014444'
 --    and part_name = '#2 HANG TAG'
-     and patternid_bom LIKE '%COH2734 O%'
-     and code_hides = 'AH81772'
-    and style_code = 'COH2734'
-    and orders_code = 'PGD2-2408-000000016'
-    and part_name = 'INT STORY PATCH TOP FACING'
+     and patternid_bom LIKE '%COH2646 A%'
+    --  and code_hides = 'AH81772'
+    and style_code = 'COH2646'
+    and orders_code IN ('N0317795_00', 'N0317791_00')
+    -- and part_name = 'INT STORY PATCH TOP FACING'
     -- and machine_code = 'k014302'
     -- and orders_code = 'N0315490_00'
     
@@ -51,7 +51,7 @@ WHERE
 --    and machine_code IN ('k012758','k012562', 'k015533', 'k014188', 'k015706', 'k015537', 'k015273', 'k015211')
 --    and code_hides = 'N0406056'
 --    and model = 'CT716 - Racer Crossbody in Signature_Natural Smooth Calf_L-54938-09_BLACK_CONS 5,66'
-    AND trunc(start_time) = to_date('07-11-2024', 'dd-mm-yyyy');
+    AND trunc(start_time) = to_date('13-11-2024', 'dd-mm-yyyy');
     -- AND trunc(start_time ) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('07-11-2024', 'dd-mm-yyyy');
 
 ROLLBACK;

@@ -57,17 +57,48 @@ WITH ranked_data AS (
         ROW_NUMBER() OVER (PARTITION BY a.patternid_bom ORDER BY a.start_time) AS rn
     FROM tb_cmz_parts a
     WHERE
+        REGEXP_LIKE(a.patternid_bom, '^COH2586 A [0-9]+/19$')
+        AND a.model LIKE '%CV436%'
+        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('15-11-2024', 'dd-mm-yyyy')
+)
+SELECT
+    machine_code, 
+    start_time, 
+    orders_code,
+    model,
+    part_name,
+    patternid_bom,
+    style_code,
+    material
+FROM ranked_data
+WHERE rn = 1
+AND ROWNUM <= 19;
+
+-- cek berdasarkan patternid_bom
+WITH ranked_data AS (
+    SELECT 
+        a.machine_code, 
+        a.start_time, 
+        a.orders_code,
+        a.model,
+        a.part_name,
+        a.patternid_bom,
+        a.style_code,
+        a.material,
+        ROW_NUMBER() OVER (PARTITION BY a.patternid_bom ORDER BY a.start_time) AS rn
+    FROM tb_cmz_parts a
+    WHERE
 --        a.orders_code = 'PGD2-2406-000000038'
-        a.patternid_bom LIKE '%COH2663 E%'
-       and a.model LIKE '%CW640%'
-        -- and a.model = 'CR652 Glazed Leather Juliet Shoulder Bag JUN-PLAN (COMELZ) CONS 6,1'
+        a.patternid_bom LIKE '%COH2774 A%'
+       and a.model LIKE '%CAT10%'
+        -- and a.model = 'HONEY BROWN CAM20 - Glazed Leather Pocket Juliet Bag 30 - SHINY SMOOTHY LEATHER - CONS 7,6598'
         -- and a.style_code != 'COH2638'
 --        and a.model LIKE '%CW640%'
---        and a.part_name = 'TOP BINDING'
+    --    and a.part_name = 'LONG SS FACING1'
         
 --        and a.machine_code IN ('k012758','k012562', 'k015533', 'k014188', 'k015706')
         -- AND a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
-        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('13-11-2024', 'dd-mm-yyyy')
+        AND TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('24-11-2024', 'dd-mm-yyyy')
 )
 SELECT
     machine_code, 
@@ -80,7 +111,6 @@ SELECT
     material
 FROM ranked_data
 WHERE rn = 1;
-
 
     
 -- query cek sebelum dan setelah diedit
@@ -95,16 +125,16 @@ SELECT
     a.code_hides
 FROM tb_cmz_parts a
 WHERE
-    -- a.patternid_bom LIKE '%COH2734 O%'
+    a.patternid_bom = 'COH2770 A 26/40'
     -- and a.orders_code NOT LIKE '%PGC1-2406%'
-    a.part_name LIKE '%FRONT%'
-    and a.model LIKE '%C9092-B4XUK%'
+    -- a.part_name LIKE '%FRONT%'
+    -- and a.model LIKE '%C9092-B4XUK%'
     -- and a.model = 'CUTTING MOLD CY707 - Kailey Shoulder Bag in Refined Pebble Leather (COMELZ)'
-    and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
+    -- and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
 --    and a.orders_code = 'PGC1-2407-000000061'
-    and a.orders_code != 'PGC1-2409-000000071'
+    -- and a.orders_code != 'PGC1-2409-000000071'
 --    and a.orders_code = 'PGD2-2406-000000016'
-   and TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('10-11-2024', 'dd-mm-yyyy');
+   and TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('28-11-2024', 'dd-mm-yyyy');
     -- AND trunc(start_time) = to_date('07-11-2024', 'dd-mm-yyyy');
     
 -- query untuk melihat pieces 
@@ -124,14 +154,15 @@ SELECT
        AND b.patternid_bom = a.patternid_bom) AS pieces
 FROM tb_cmz_parts a
 WHERE
-    a.patternid_bom =  'COH2698 A 5/20'
+    a.patternid_bom LIKE '%COH2770 A%'
+    -- a.patternid_bom =  'COH2646 A 16/20'
     -- and a.orders_code NOT LIKE '%PGC1-2406%'
-    -- and a.part_name = 'FLAP TOP'
-    and a.model = 'CAD75 - Glazed Leather Juliet Shoulder Bag 25 - SHINY CRINKLE LEATHER - CONS 4,3822'
+    and a.part_name = 'EXT ZIP PULLER'
+    and a.model = 'HONEY BROWN CAM20 - Glazed Leather Pocket Juliet Bag 30 - SHINY SMOOTHY LEATHER - CONS 7,6598'
     -- and a.machine_code IN ('k014444','k012757', 'k014302', 'k015660', 'k015444', 'k015465')
-    -- and a.orders_code != 'PGC1-2409-000000063'
---    and a.orders_code = 'PGD2-2406-000000016'
-    and TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('07-11-2024', 'dd-mm-yyyy');
+    -- and a.orders_code NOT LIKE '%PG'
+   and a.orders_code = 'PGD2-2406-000000016'
+    and TRUNC(a.start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('21-11-2024', 'dd-mm-yyyy');
 
 
 

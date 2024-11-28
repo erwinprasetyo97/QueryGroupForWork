@@ -3,13 +3,13 @@ contoh kasus : COH2104 A 219 -> COH2104 A 2/19
 COH2618 A 1826 -> COH2618 A 18/26
 */
 UPDATE tb_cmz_parts
-SET patternid_bom = REGEXP_REPLACE(patternid_bom, '([0-9]{1,2})(21)', '\1/\2')
-WHERE patternid_bom LIKE '%COH2569 A%' 
-  AND style_code = 'COH2569'
-  and model LIKE '%CR652%'
+SET patternid_bom = REGEXP_REPLACE(patternid_bom, '([0-9]{1,2})(1)', '\1/\2')
+WHERE patternid_bom LIKE '%COH2104 AC%' 
+  AND style_code = 'COH2104'
+  and model LIKE '%C7965%'
 --  and model = 'CR652_Glazed Leather Juliet Shoulder Bag_ Shiny crinkle leather_CONS 6,1'
   and PATTERNID_BOM NOT LIKE '%/%' -- apabila sudah ada pattern yang sudah benar
-  AND TRUNC(start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('12-11-2024', 'dd-mm-yyyy');
+  AND TRUNC(start_time) BETWEEN TO_DATE('01-11-2024', 'dd-mm-yyyy') AND TO_DATE('22-11-2024', 'dd-mm-yyyy');
 
 COMMIT;
 ROLLBACK;
@@ -275,8 +275,9 @@ WHERE
 
 --    model = 'UPDATESINGLE_CR981_Glovetanned Leather Juliet Shoulder Bag_JAN-PLAN (COMELZ)_CONS_6,1'
     style_code = 'COH2770'
-    and model = 'CAM20 - Glazed Leather Pocket Juliet Bag 30 - SHINY SMOOTHY LEATHER - CONS 7,6598'
-    and trunc(start_time) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('12-11-2024', 'dd-mm-yyyy');
+    and model LIKE '%CAM20%'
+    -- and orders_code != 'PGD2-2410-000000062'
+    and trunc(start_time) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('28-11-2024', 'dd-mm-yyyy');
 
 COMMIT;
 ROLLBACK;
@@ -297,45 +298,39 @@ WHERE
 AND trunc(start_time) BETWEEN to_date('01-10-2024', 'dd-mm-yyyy') AND to_date('21-10-2024', 'dd-mm-yyyy');
 
 -- update data which name Glovetanned Leather Emmy Saddle Bag 23
--- UPDATE tb_cmz_parts
--- SET patternid_bom = 
---     CASE
---         WHEN part_name = 'ANCHOR' THEN 'COH2573 A 10/26'
---         WHEN part_name = 'ANCHOR LOOP FACING' THEN 'COH2573 A 16/26'
---         WHEN part_name = 'BACK SLASH PKT' THEN 'COH2573 A 14/26'
---         WHEN part_name = 'BUCKLE KEEPER FACING' THEN 'COH2573 A 13/26'
---         WHEN part_name = 'BUCKLE KEEPER TOP' THEN 'COH2573 A 25/26'
---         WHEN part_name = 'CENTER COLLAR FRONT LINING' THEN 'COH2573 A 17/26'
---         WHEN part_name = 'FLAP TOP' THEN 'COH2573 A 26/26'
---         WHEN part_name = 'FLOATING KEEPER FACING' THEN 'COH2573 A 9/26'
---         WHEN part_name = 'FLOATING KEEPER TOP' THEN 'COH2573 A 11/26'
---         WHEN part_name = 'FRONT' THEN 'COH2573 A 2/26'
---         WHEN part_name = 'FRONT PIPING' THEN 'COH2573 A 20/26'
---         WHEN part_name = 'GUSSET' THEN 'COH2573 A 5/26'
---         WHEN part_name = 'HANDLE BINDING' THEN 'COH2573 A 19/26'
---         WHEN part_name = 'HANDLE FACING BOTH ENDS' THEN 'COH2573 A 6/26'
---         WHEN part_name = 'HANDLE FACING1' THEN 'COH2573 A 7/26'
---         WHEN part_name = 'HANDLE TOP' THEN 'COH2573 A 23/26'
---         WHEN part_name = 'HANGTAG FACING' THEN 'COH2573 A 24/26'
---         WHEN part_name = 'HANGTAG TOP' THEN 'COH2573 A 18/26'
---         WHEN part_name = 'LONG SS FACING LEFT' THEN 'COH2573 A 21/26'
---         WHEN part_name = 'LONG SS FACING RIGHT' THEN 'COH2573 A 22/26'
---         WHEN part_name = 'LONG SS TOP' THEN 'COH2573 A 15/26'
---         WHEN part_name = 'SHORT SS BUCKLE LOOP TOP' THEN 'COH2573 A 1/26'
---         WHEN part_name = 'SHORT SS FACING' THEN 'COH2573 A 3/26'
---         WHEN part_name = 'SHORT SS TOP' THEN 'COH2573 A 4/26'
---         WHEN part_name = 'SS ANCHOR FACING2' THEN 'COH2573 A 12/26'
---         WHEN part_name = 'SS ANCHOR TOP' THEN 'COH2573 A 8/26'
---         else patternid_bom
---     END
--- WHERE 
 
--- --    model = 'UPDATESINGLE_CR981_Glovetanned Leather Juliet Shoulder Bag_JAN-PLAN (COMELZ)_CONS_6,1'
---     style_code = 'COH2573'
---     and model = 'CR667 - Glovetanned Leather Emmy Saddle Bag 23 FEB-PLAN (COMELZ)_5,1039'
---     and trunc(start_time) BETWEEN to_date('01-10-2024', 'dd-mm-yyyy') AND to_date('28-10-2024', 'dd-mm-yyyy');
+UPDATE tb_cmz_parts
+SET patternid_bom = 
+    CASE
+        WHEN part_name = 'SS KEEPER FACING1' THEN 'COH2586 A 9/21'
+        WHEN part_name = 'SHORT SS TOP1' THEN 'COH2586 A 6/21'
+        WHEN part_name = 'SHORT SS BUCKLE LOOP FAICNG' THEN 'COH2586 A 13/21'
+        WHEN part_name = 'CENTER DIVIDER GUSSET ACCORDION RIGHT' THEN 'COH2586 A 11/21'
+        WHEN part_name = 'SHORT SS FACING' THEN 'COH2586 A 14/21'
+        WHEN part_name = 'CENTER DIVIDER GUSSET ACCORDION LEFT GUSSET' THEN 'COH2586 A 17/21'
+        WHEN part_name = 'SHELL GUSSET' THEN 'COH2586 A 8/21'
+        WHEN part_name = 'FLAP TOP' THEN 'COH2586 A 12/21'
+        WHEN part_name = 'HANGTAG TOP' THEN 'COH2586 A 2/21'
+        WHEN part_name = 'CENTER DIVIDER GUSSET ACCORDION MIDDLE' THEN 'COH2586 A 18/21'
+        WHEN part_name = 'HANGTAG FACING' THEN 'COH2586 A 19/21'
+        WHEN part_name = 'SHORT SS FLOATING KEEPER FACING' THEN 'COH2586 A 7/21'
+        WHEN part_name = 'HANDLE TOP' THEN 'COH2586 A 16/21'
+        WHEN part_name = 'PIPING' THEN 'COH2586 A 4/21'
+        WHEN part_name = 'SHORT SS FLOATING KEEPER TOP' THEN 'COH2586 A 1/21'
+        WHEN part_name = 'SS KEEPER TOP1' THEN 'COH2586 A 5/21'
+        WHEN part_name = 'HANDLE FACING' THEN 'COH2586 A 10/21'
+        WHEN part_name = 'LONG SS FACING' THEN 'COH2586 A 15/21'
+        WHEN part_name = 'LONG SS TOP' THEN 'COH2586 A 21/21'
+        else patternid_bom
+    END
+WHERE 
 
--- COMMIT;
+--    model = 'UPDATESINGLE_CR981_Glovetanned Leather Juliet Shoulder Bag_JAN-PLAN (COMELZ)_CONS_6,1'
+    style_code = 'COH2586'
+    and model = 'CV436 - Coated Canvas Signature Cassie Crossbody 19 (COMELZ) CONS 3,2646'
+    and trunc(start_time) BETWEEN to_date('01-11-2024', 'dd-mm-yyyy') AND to_date('15-11-2024', 'dd-mm-yyyy');
+
+COMMIT;
 
 -- UPDATE tb_cmz_parts
 -- SET patternid_bom = 
@@ -405,9 +400,12 @@ WHERE
     and trunc(start_time) BETWEEN to_date('01-10-2024', 'dd-mm-yyyy') AND to_date('31-10-2024', 'dd-mm-yyyy');
 
 UPDATE tb_cmz_parts
-SET patternid_bom = 'COH2638 A 5/30'
-WHERE model = 'MULTI CW565 - Refined Pebble Leather Cassie Crossbody 17 (COMELZ) CONS 3,1533' 
-And orders_code = 'PGC1-2409-000000076'
-AND part_name = 'BACK SLASH PKT'
-and trunc(start_time ) between to_date('01-10-2024', 'dd-mm-yyyy') and to_date('31-10-2024', 'dd-mm-yyyy');
+SET patternid_bom = 'COH2570 A 21/22'
+WHERE
+model LIKE '%CR981%'
+-- model = 'UPDATE HANGTAG_CR981_Glovetanned Leather Juliet Shoulder Bag_JAN-PLAN (COMELZ)_CONS_6,1' 
+-- And orders_code = 'PGD2-2410-000000104'
+AND part_name = 'ANCHOR LOOP FACING'
+and trunc(start_time ) between to_date('01-11-2024', 'dd-mm-yyyy') and to_date('21-11-2024', 'dd-mm-yyyy');
 
+COMMIT;
